@@ -1,0 +1,4 @@
+.comment-item-content {
+  display: flex;
+  justify-content: space-evenly;
+}
