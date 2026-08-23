@@ -1,0 +1,33 @@
+.comment-input {
+  width: 100%;
+
+  .MuiOutlinedInput-root {
+    border-radius: 999px;
+    background: #ffffff;
+    padding-right: 6px;
+    transition:
+      box-shadow 0.15s ease,
+      border-color 0.15s ease;
+
+    fieldset {
+      border-color: #e5e7eb;
+    }
+
+    &:hover fieldset {
+      border-color: #c7c9f5;
+    }
+
+    &.Mui-focused fieldset {
+      border-color: #4f46e5;
+      border-width: 1.5px;
+    }
+  }
+
+  &__send {
+    transition: transform 0.15s ease;
+
+    &:not(.Mui-disabled):hover {
+      transform: translateX(2px) scale(1.05);
+    }
+  }
+}

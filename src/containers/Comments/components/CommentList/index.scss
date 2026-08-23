@@ -1,0 +1,8 @@
+.comment-list {
+  display: flex;
+  flex-direction: column;
+
+  &--nested {
+    margin-top: 2px;
+  }
+}

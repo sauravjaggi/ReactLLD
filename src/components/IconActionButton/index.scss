@@ -1,0 +1,26 @@
+.icon-action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #6b7280;
+
+  .MuiIconButton-root {
+    color: inherit;
+    padding: 4px;
+  }
+
+  &__label {
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 10px;
+  }
+
+  &.is-active {
+    color: #4f46e5;
+  }
+
+  &--error.is-active,
+  &--error:hover {
+    color: #f43f5e;
+  }
+}

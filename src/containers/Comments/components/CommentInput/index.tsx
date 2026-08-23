@@ -1,5 +1,7 @@
 import { useState } from "react";
-import "./index.css";
+import { TextField, IconButton, InputAdornment } from "@mui/material";
+import SendRoundedIcon from "@mui/icons-material/SendRounded";
+import "./index.scss";
 
 interface CommentInputProps {
   placeholder?: string;
@@ -19,8 +21,11 @@ const CommentInput = ({
 }: CommentInputProps) => {
   const [comment, setComment] = useState<string>(text);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setComment(e.target.value);
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleAddComment();
+    }
   };
 
   const handleAddComment = () => {
@@ -31,15 +36,32 @@ const CommentInput = ({
   };
   return (
     <div className="comment-input">
-      <input
-        type="text"
+      <TextField
+        fullWidth
+        size="small"
+        variant="outlined"
         placeholder={placeholder}
         value={comment}
-        onChange={handleInputChange}
+        onChange={(e) => setComment(e.target.value)}
+        onKeyDown={handleKeyDown}
+        autoFocus={action === "Edit"}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                className="comment-input__send"
+                size="small"
+                color="primary"
+                disabled={!comment.trim()}
+                onClick={handleAddComment}
+                aria-label={action === "Edit" ? "Save comment" : "Post comment"}
+              >
+                <SendRoundedIcon fontSize="small" />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
-      <button onClick={handleAddComment}>
-        {action === "Edit" ? "Save" : placeholder}
-      </button>
     </div>
   );
 };

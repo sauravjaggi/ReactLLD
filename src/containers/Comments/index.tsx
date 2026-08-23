@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { Container, Paper, Typography, Divider } from "@mui/material";
 import CommentInput from "./components/CommentInput";
 import CommentList from "./components/CommentList";
-import "./index.css";
+import "./index.scss";
 
 export interface Comment {
   id: string;
@@ -161,15 +162,24 @@ const CommentContainer = () => {
   };
 
   return (
-    <div className="comment-container">
-      <CommentInput addComment={addComment} />
-      <CommentList
-        comments={comments}
-        addComment={addComment}
-        addLike={addLike}
-        deleteComment={deleteComment}
-      />
-    </div>
+    <Container maxWidth="sm" className="comment-container">
+      <Paper elevation={0} className="comment-container__panel">
+        <Typography variant="h6" className="comment-container__title">
+          {comments.length} {comments.length === 1 ? "Comment" : "Comments"}
+        </Typography>
+
+        <CommentInput addComment={addComment} />
+
+        <Divider className="comment-container__divider" />
+
+        <CommentList
+          comments={comments}
+          addComment={addComment}
+          addLike={addLike}
+          deleteComment={deleteComment}
+        />
+      </Paper>
+    </Container>
   );
 };
 
