@@ -1,0 +1,259 @@
+// -----------------------------
+// Variables
+// -----------------------------
+$color-bg: #fafaf7;
+$color-surface: #ffffff;
+$color-ink: #1c1b19;
+$color-ink-soft: #6e6b63;
+$color-line: #e6e3dc;
+$color-accent: #2f6f4e;
+$color-accent-ink: #ffffff;
+$color-danger: #a6402f;
+
+$radius: 7px;
+$gap: 16px;
+$font-body:
+  "Inter",
+  system-ui,
+  -apple-system,
+  sans-serif;
+$font-display: Georgia, serif;
+
+@mixin button-reset {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+// -----------------------------
+// Page shell
+// -----------------------------
+.cart-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 24px 72px;
+  font-family: $font-body;
+  color: $color-ink;
+  background: $color-bg;
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 28px;
+    margin: 0 0 28px;
+    border-bottom: 1px solid $color-line;
+    padding-bottom: 16px;
+  }
+}
+
+// -----------------------------
+// Add-item form
+// -----------------------------
+.add-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+
+  &__input {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 12px;
+    border: 1px solid $color-line;
+    border-radius: $radius;
+    background: $color-surface;
+    color: $color-ink;
+    flex: 1 1 160px;
+
+    &--price {
+      flex: 0 1 110px;
+    }
+
+    &::placeholder {
+      color: $color-ink-soft;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: 1px;
+    }
+  }
+}
+
+.form-error {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 12.5px;
+  color: $color-danger;
+}
+
+// -----------------------------
+// Cart list
+// -----------------------------
+.cart {
+  display: flex;
+  flex-direction: column;
+
+  &__empty {
+    padding: 32px 0;
+    text-align: center;
+    color: $color-ink-soft;
+    font-size: 14px;
+  }
+}
+
+.cart-row {
+  display: grid;
+  grid-template-columns: 1.5fr 0.7fr auto 0.7fr auto;
+  align-items: center;
+  gap: $gap;
+  padding: 16px 0;
+  border-bottom: 1px solid $color-line;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &__name {
+    font-weight: 500;
+  }
+
+  &__price,
+  &__line-total {
+    color: $color-ink-soft;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__line-total {
+    color: $color-ink;
+    text-align: right;
+  }
+}
+
+// -----------------------------
+// Quantity stepper
+// -----------------------------
+.qty-control {
+  display: flex;
+  align-items: center;
+  border: 1px solid $color-line;
+  border-radius: $radius;
+  overflow: hidden;
+  width: fit-content;
+
+  &__value {
+    width: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+// -----------------------------
+// Buttons
+// -----------------------------
+.btn {
+  @include button-reset;
+  font-size: 14px;
+  border-radius: $radius;
+  transition:
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+
+  &--icon {
+    width: 28px;
+    height: 28px;
+    background: $color-surface;
+    color: $color-ink;
+    font-size: 16px;
+    line-height: 1;
+
+    &:hover:not(:disabled) {
+      background: $color-line;
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+  }
+
+  &--remove {
+    color: $color-ink-soft;
+    padding: 6px;
+    font-size: 13px;
+
+    &:hover {
+      color: $color-danger;
+    }
+  }
+
+  &--add {
+    background: $color-accent;
+    color: $color-accent-ink;
+    font-weight: 600;
+    padding: 10px 18px;
+
+    &:hover {
+      filter: brightness(1.08);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 1px;
+  }
+}
+
+// -----------------------------
+// Summary
+// -----------------------------
+.summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 2px solid $color-ink;
+
+  &__label {
+    font-family: $font-display;
+    font-size: 16px;
+  }
+
+  &__total {
+    font-family: $font-display;
+    font-size: 24px;
+    margin: 0;
+  }
+}
+
+// -----------------------------
+// Small screens
+// -----------------------------
+@media (max-width: 480px) {
+  .cart-row {
+    grid-template-columns: 1fr auto;
+    row-gap: 8px;
+
+    &__price {
+      display: none;
+    }
+
+    &__line-total {
+      order: 3;
+      text-align: left;
+    }
+  }
+
+  .btn--remove {
+    order: 4;
+    justify-self: start;
+    padding-left: 0;
+  }
+}
